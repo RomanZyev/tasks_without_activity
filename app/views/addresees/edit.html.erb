@@ -1,0 +1,32 @@
+<h2><%= l(:addresee_edit) %></h2>
+<%= error_messages_for @addresee %>
+
+<div class="box tabular">
+	<%= labelled_form_for @addresee, url: {action: "update"} do |f| %>
+		 <p>
+   			<%= f.text_field :email %>
+		</p>
+				
+		<fieldset class="box tabular" id="addresees_property">
+
+		<legend><%=l(:label_addresees_property_index)%></legend>
+		<% @scope.each do |p| %>
+    	<label class="floating">
+    		<%= check_box_tag 'project_id[]',p.id, @addresees_property.include?(p.id), 
+    				:id => "project_id#{p.id}" %>
+    		<%= p.name %>
+		 </label>
+		<% end %>
+		</fieldset>
+
+ 		<p>
+			<%= submit_tag l(:button_save) %>
+			<%= link_to l(:button_cancel), {:controller => 'addresees', :action => 'index'}%>	
+		</p>
+		
+	<% end %>
+</div>
+
+
+
+		 

@@ -1,0 +1,23 @@
+ru:
+  # my_label: "My label"
+  Tasks Without Activity: Задачи без активности
+  tasks_without_activity: Задачи без активности
+  without activity: "Задачи без ответов"
+  Settings_plugin: Настройки плагина
+  label_addresees: Получатели
+  list_addreses: Редактировать получателей
+  label_addresee_new: Добавить получателя
+  addresee_new: Добавить получателя
+  addresee_edit: Редактировать получателя
+  test send later: Отправить письмо
+  
+  label_addresees_property_index: Отслеживать проекты
+  
+  mail_body_without_activaty: "%{count} " 
+  label_updated_time_active: " %{day}  %{month}"
+   
+  email: "получатель"
+  field_email: "получатель"
+  list issues withot activity: Список задач без активности
+  list_without_activity: Задачи без активности
+  User group: Айди группы контроля

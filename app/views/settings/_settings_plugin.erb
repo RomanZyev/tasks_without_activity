@@ -1,0 +1,18 @@
+<h2><%=l("Settings_plugin")%></h2>
+
+<p>
+	<label for="settings_user_group">User group</label>
+	<input type="integer" id="settings_user_group" value="<%= settings['user_group'] %>" name="settings[user_group]" />
+</p>
+
+<p><%= link_to l("list_addreses"), 
+				{:controller => 'addresees',
+					:action => 'index'} %> </p>
+
+<p><%= link_to l("test send later"), 
+				{:controller => 'without_activity',
+					:action => 'send'} %> </p>
+
+<p><%= link_to l("list issues withot activity"), 
+				{:controller => 'list_without_activity', 
+					:action => 'index'} %> </p>

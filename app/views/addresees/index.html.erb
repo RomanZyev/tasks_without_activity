@@ -1,0 +1,57 @@
+<div class="content_for">
+<h2><%=l("list_addreses")%></h2>
+
+
+<%= link_to l(:Settings_plugin), "/settings/plugin/tasks_without_activity" %>
+
+
+<div style="padding: 10px;">
+	
+	<div class="contextual">
+  		<%= link_to l(:label_addresee_new),
+              		{:controller => 'addresees', :action => 'new'},
+              		:class => 'icon icon-add' %>
+	</div>
+	
+<table class="plugin_settings" style="width: 100%;">
+
+<thead>
+  <tr>
+     <th align="left"><%=l(:id)%></th>
+    <th align="left"><%= l(:email) %></th>   
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  	
+  <% @addresees.each do |a| %>
+      <tr class="<%= cycle('odd', 'even') %>">
+        <td class="corr-content"><%= simple_format h(a.id) %></td>
+        <td class="corr-title"><%= link_to h(a.email),{ :action => :edit, :id => a.id } %></td>
+        
+
+        <td class="buttons">
+          <%= link_to l(:button_edit),
+                      {
+                          :controller => 'addresees',
+                          :action => 'edit',
+                          :id => a.id
+                      },
+                      :class => 'icon icon-edit' %>
+          <%= link_to l(:button_delete),
+                      {
+                          :controller => 'addresees',
+                          :action => 'destroy',
+                          :id => a.id
+                      },
+                      :method => :delete,
+                      :confirm => l(:text_are_you_sure),
+                      :class => 'icon icon-del' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+     	
+</table>
+
+</div>

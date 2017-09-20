@@ -1,0 +1,140 @@
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        min-width: 320px;
+        background-color: #ffffff;
+    }
+    
+    table {
+        border-spacing: 0;
+        font-family: sans-serif;
+    }
+    
+    .table-block--grey {
+        background: #f2f2f2;
+    }
+    
+    .table-cell--right {
+        text-align: right;
+    }
+    
+    td {
+        padding: 0;
+    }
+    
+    img {
+        border: 0;
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .table-title {
+            font-size: 16px!important;
+            text-align: center;
+        }
+    }
+    </style>
+</head>
+
+<body style="margin:0; padding:0;" bgcolor="#ffffff">
+    <!-- Основная таблица -->
+    <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <!-- Обертка -->
+                <center class="wrapper" style="max-width: 80%; width: 100%;margin:0 auto">
+                    <table class="contenttable" cellpadding="0" cellspacing="0" align="center" style="width:100%" ;>
+                        <!-- Заголовок -->
+                        <tr>
+                            <td style="padding:30px 0px;text-align:center;">
+                                <span class="table-title" style="color:#000;font:22px Arial, sans-serif; font-weight:400;line-height:24px; display:inline-block;">Задачи без ответа на 
+                                	<%=Date.today.day%> <%=month_name(Date.today.month)%> <%= format_time(Time.new,false)%></span>
+                            </td>
+                        </tr>
+                        <!-- Конец заголовока -->
+                        <!-- Контент -->
+                        <tr>
+                            <td>
+
+                                <!-- Блок 1 -->
+                                <% @issues.each do |assigned, project| %>
+                                <table class="table-block" cellpadding="0" cellspacing="0" align="center" style="table-layout: fixed; width:100%; border:1px solid #a9a9a9;">
+                                    <tr>
+                                        <td style="padding:7px 20px;border-bottom:1px dashed #b2b2b2;font-size:0px;">
+                                            <div class="table-cell" style="display:inline-block;vertical-align:top; width:100%;">
+                                                <table cellpadding="0" cellspacing="0" align="left" style="table-layout: fixed; width:100%;">
+                                                    <tr>
+                                                        <td align="left">
+                                                        	
+	
+                                                            <b style="color:#000; font:14px Arial, sans-serif; font-weight:800;line-height:24px;text-align:left;"><%= Project.find(project[0].project_id) %> - </b>
+                                                            <span style="color:#000; font:14px Arial, sans-serif; font-weight:400;line-height:24px;text-align:left;"><%= l(:mail_body_without_activaty, :count => project.size)%></span>
+                                                            <span style="display:inline-block;width:40px"></span>
+                                                            <%if @users.size != 0  &&  project[0] != nil %> 
+																<% (Member.where(:project_id => project[0].project_id).pluck("user_id") & @users).each do |user| %>
+			
+																	<span style="color:#000; font:14px Arial, sans-serif; font-weight:400;line-height:24px;text-align:right;"><%= User.find(user)%>,
+																		</span>
+																<%end%> 
+															<%end%>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% project.each do |issue| -%>
+                                    <tr>
+                                        <td style="padding:7px 20px;font-size:0px;">
+                                            <div class="table-cell" style="display:inline-block;vertical-align: top;width:100%;">
+                                            	<table cellpadding="0" cellspacing="0" align="left" style="table-layout: fixed; width:100%;">
+                                            		<tr>
+                                            			<td align="left">
+                                            				<span style="color:#000; font:14px Arial, sans-serif; font-weight:400;line-height:24px;text-align:right;">
+                                                            <% if Date.today == issue.updated_on %>
+                                                                <strong><%= link_to_issue(issue, :project => false, :only_path => false) %></strong>,
+                                                            <%else%>
+                                                                <%= link_to_issue(issue, :project => false, :only_path => false) %>
+                                                            <% end -%>
+															</span>
+															<span style="color:#b8b8b8; font:14px Arial, sans-serif; font-weight:400;line-height:24px;text-align:right;"> - 
+																<%= l(:label_updated_time_active, :day => issue.updated_on.day, :month => month_name(issue.updated_on.month))%>
+																<%= issue.updated_on.year if issue.updated_on.year != Date.today.year %> <%= format_time(issue.updated_on,false) %> 
+															</span>
+                                            			</td>
+                                            		</tr>	
+												</table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                	<% end -%>
+                                
+                                </table>
+                                <% end -%>
+                                <!-- Конец Блок 1 -->
+                                
+                        </tr>
+                        <!-- Конец контента -->
+                        <tr>
+                            <td style="height: 30px;">
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+                <!-- Конец обертки -->
+            </td>
+        </tr>
+    </table>
+    <!-- Конец основной таблицы -->
+</body>
+
+</html>
+
+
